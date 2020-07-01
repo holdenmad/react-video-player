@@ -1,0 +1,25 @@
+.controls {
+    /* display: flex;
+    position: relative;
+    width: 100%; */
+    background-color: black;
+    padding: 10px;
+}
+
+button {
+    height: 3rem;
+    width: 3rem;
+    background-color: grey;
+}
+
+.playPause {
+color: white;
+}
+
+.stop {
+color: white;
+}
+
+.timer {
+    color: white;
+}

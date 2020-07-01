@@ -2,49 +2,60 @@ import React, {useRef} from 'react';
 // import Controls from './Controls';
 import '../Video.css';
 
-export default function Video({src, title}) {
+const Video = ({src, title}) => {
     //props coud be: active, autoplay, endcallback, progresscallback
    //states could be: playing, paused
     //REFS
         // video ref
-        const video = useRef();
+        const videoRef = useRef();
 
         // render ref?
             // const renders = useRef(1);
 
         // volume ref
-        const volume = useRef();
+        const volumeRef = useRef();
 
         // timer ref
 
    //FUNCTIONS
+// //playpause
+// const playPauseToggle = () => {
+//     if(videoRef.paused) {
+//         videoRef.play();
+//     } else {
+//         videoRef.pause();
+//     }
+// }
+
         //function to play
         const playEvent = () => {
-            video.current.play();
+            videoRef.current.play();
         };
 
-        //function to pause can these be the same?
+        // //function to pause can these be the same?
         const pauseEvent = () => {
-            video.current.pause();
+            videoRef.current.pause();
         };
         //function to change volume
 
         const volumeHandler = () => {
-            video.current.volume = volume.current.value;
+            videoRef.current.volume = volumeRef.current.value;
         };
         //function to change time in video
 
 return (
     <div className="c-video">
     {/*Make simple HTML video with source*/}
-        <video className="video" src={src} ref={video} title={title}/>
+        <video ref={videoRef} className="videoPlayer" src={src} title={title} autoplay="true" loop="true" controls="true"></video>
         <p>{title}</p>
       <div className="controls">
             <button className="playPause" onClick={playEvent} data-icon="P" >Pl/Pa</button>
             <button className="stop" onClick={pauseEvent} data-icon="S" >Stop</button>
              <div class="timer"><div></div><span aria-label="timer">00:00</span></div>
-             <input onChange={volumeHandler} type="range" ref={volume}></input>
+             <input onChange={volumeHandler} type="range" ref={volumeRef}></input>
         </div>
     </div>
 )
 }
+
+export default Video;

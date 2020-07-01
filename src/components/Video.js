@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 // import Controls from './Controls';
 import '../Video.css';
 
-export default function Video({src, title, props}) {
+export default function Video({src, title}) {
     //props coud be: active, autoplay, endcallback, progresscallback
    //states could be: playing, paused
     //REFS

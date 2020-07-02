@@ -45,16 +45,6 @@ const Video = ({src, title}) => {
             }
         }
 
-        //function to play
-        // const playEvent = () => {
-        //     videoRef.current.play();
-        // };
-
-        // // //function to pause can these be the same?
-        // const pauseEvent = () => {
-        //     videoRef.current.pause();
-        // };
-
         //function to change volume
         const volumeHandler = (e) => {
             videoRef.current.volume = volumeRef.current.value;
@@ -75,9 +65,8 @@ const Video = ({src, title}) => {
         //function to change time in video
         const handleTimeUpdate =() => {
             const timeValue = videoRef.current.currentTime / videoRef.current.duration;
-
-           // timeRef.current.value = timeValue;
-            timeRef.current.innerHTML = sec2time(videoRef.current.currentTime) + '/' + sec2time(videoRef.current.duration);
+             timeRef.current.value = timeValue;
+             timeRef.current.innerHTML = sec2time(videoRef.current.currentTime) + '/' + sec2time(videoRef.current.duration);
         }
 
         const handleTimeScrobble = (e) => {
@@ -86,10 +75,7 @@ const Video = ({src, title}) => {
             console.log(videoRef.currentTime);
         }
 
-
-        
-
-return (
+return ( 
     <div className="c-video">
     {/*Make simple HTML video with source*/}
         <video ref={videoRef} className="videoPlayer" onTimeUpdate={handleTimeUpdate} src={src} title={title} autoPlay={false} loop={true}></video>
@@ -98,14 +84,14 @@ return (
             <button className="playPauseBtn pinkBtn" ref={playPauseRef} onClick={playPauseToggle} data-icon="P">Play</button>
             {/*Timer Slider - to change time? display time? onTimeUpdate?*/}
              <input className="timer slider" onClick={handleTimeScrobble} defaultValue="0" min="0" max="1" step=".01" ref={timeRef} type="range" label="timer"/>
+             <span className="timeDisplay" ref={timeRef}>00:00
+             </span>
             {/*Volume Slider*/}
              <input className="volume slider" onChange={volumeHandler} defaultValue=".5" min="0.0" max="1.0" step=".01" type="range" ref={volumeRef}/>
+             {/* <span className="volumeDisplay" ref={volumeRef}></span> */}
             {/**/}
-
-             <button className="muteBtn pinkBtn" onClick={muteEvent}>Mute</button>
-             <span className="timeDisplay" ref={timeRef}>
-             </span>
-
+             <button className="muteBtn pinkBtn" ref={muteRef} onClick={muteEvent}>Mute</button>
+           
         </div>
         <p className="title">{title}</p>
     </div>
@@ -113,8 +99,3 @@ return (
 }
 
 export default Video;
-
-/* Questions
-- Which aspects of the volumeHandler are required? Why doesn't the input work without the min/max, step, type, defaultvalue?
--
-*/

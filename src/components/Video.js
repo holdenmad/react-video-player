@@ -15,13 +15,17 @@ const Video = ({src, title}) => {
         // timer ref
         const timeRef = useRef();
 
+        const playPauseRef = useRef();
+
    //FUNCTIONS
         //function to play/pause
         const playPauseToggle = () => {
             if(videoRef.current.paused) {
                 videoRef.current.play();
+                playPauseRef.current.innerHTML = "Pause";
             } else{
                 videoRef.current.pause();
+                playPauseRef.current.innerHTML = "Play";
                 console.log(videoRef.currentTime);
             }
         }
@@ -55,6 +59,7 @@ const Video = ({src, title}) => {
         const handleTimeUpdate =() => {
             const timeValue = videoRef.current.currentTime / videoRef.current.duration;
             timeRef.current.value = timeValue;
+            console.log(timeValue)
         }
 
         const handleTimeScrobble = (e) => {
@@ -62,19 +67,19 @@ const Video = ({src, title}) => {
             console.log(e.currentTarget.value);
         }
 
-return (
+return ( 
     <div className="c-video">
     {/*Make simple HTML video with source*/}
         <video ref={videoRef} className="videoPlayer" onTimeUpdate={handleTimeUpdate} src={src} title={title} autoPlay={false} loop={true}></video>
       <div className="controls">
             {/*Play/Pause Button*/}
-            <button className="pinkBtn" onClick={playPauseToggle} data-icon="P">Pl/Pa</button>
+            <button className="playPauseBtn pinkBtn" ref={playPauseRef} onClick={playPauseToggle} data-icon="P">Play</button>
             {/*Timer Slider - to change time? display time? onTimeUpdate?*/}
-             <input className="timer" onClick={handleTimeScrobble} defaultValue="0" min="0" max="1" step=".01" ref={timeRef} type="range" label="timer"/>
+             <input className="timer slider" onClick={handleTimeScrobble} defaultValue="0" min="0" max="1" step=".01" ref={timeRef} type="range" label="timer"/>
             {/*Volume Slider*/}
-             <input className="volume" onChange={volumeHandler} defaultValue=".5" min="0.0" max="1.0" step=".01" type="range" ref={volumeRef}/>
+             <input className="volume slider" onChange={volumeHandler} defaultValue=".5" min="0.0" max="1.0" step=".01" type="range" ref={volumeRef}/>
             {/**/}
-             <button className="pinkBtn" onClick={muteEvent}>Mute</button>
+             <button className="muteBtn pinkBtn" onClick={muteEvent}>Mute</button>
         </div>
         <p className="title">{title}</p>
     </div>

@@ -52,20 +52,28 @@ const Video = ({src, title}) => {
         }
 
         //function to change time in video
-        const timeChange =() => {
-            videoRef.currentTime = timeRef.current.value;
+        const handleTimeUpdate =() => {
+            const timeValue = videoRef.current.currentTime / videoRef.current.duration;
+            timeRef.current.value = timeValue;
+        }
+
+        const handleTimeScrobble = (e) => {
+            videoRef.current.currentTime = e.currentTarget.value * videoRef.current.duration;
+            console.log(e.currentTarget.value);
         }
 
 return (
     <div className="c-video">
     {/*Make simple HTML video with source*/}
-        <video ref={videoRef} className="videoPlayer" src={src} title={title} autoPlay={false} loop={true}></video>
+        <video ref={videoRef} className="videoPlayer" onTimeUpdate={handleTimeUpdate} src={src} title={title} autoPlay={false} loop={true}></video>
       <div className="controls">
-            <button className="pinkBtn" onClick={playPauseToggle} data-icon="P" >Pl/Pa</button>
-
-             <input className="timer" onChange={timeChange} min="0" max="100" step="1" ref={timeRef} type="range" label="timer"/>
-             <input onChange={volumeHandler} defaultValue=".5" min="0.0" max="1.0" step=".01" type="range" ref={volumeRef}/>
-             
+            {/*Play/Pause Button*/}
+            <button className="pinkBtn" onClick={playPauseToggle} data-icon="P">Pl/Pa</button>
+            {/*Timer Slider - to change time? display time? onTimeUpdate?*/}
+             <input className="timer" onClick={handleTimeScrobble} defaultValue="0" min="0" max="1" step=".01" ref={timeRef} type="range" label="timer"/>
+            {/*Volume Slider*/}
+             <input className="volume" onChange={volumeHandler} defaultValue=".5" min="0.0" max="1.0" step=".01" type="range" ref={volumeRef}/>
+            {/**/}
              <button className="pinkBtn" onClick={muteEvent}>Mute</button>
         </div>
         <p className="title">{title}</p>

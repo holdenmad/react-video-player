@@ -17,6 +17,8 @@ const Video = ({src, title}) => {
 
         const playPauseRef = useRef();
 
+        const muteRef = useRef();
+
    //FUNCTIONS
         //function to play/pause
         const playPauseToggle = () => {
@@ -50,8 +52,10 @@ const Video = ({src, title}) => {
         const muteEvent = () => {
             if(videoRef.current.muted === true) {
                 videoRef.current.muted = false;
+                muteRef.current.innerHTML = "Mute";
             } else{
                 videoRef.current.muted = true;
+                muteRef.current.innerHTML = "Unmute";
             }
         }
 
@@ -79,7 +83,7 @@ return (
             {/*Volume Slider*/}
              <input className="volume slider" onChange={volumeHandler} defaultValue=".5" min="0.0" max="1.0" step=".01" type="range" ref={volumeRef}/>
             {/**/}
-             <button className="muteBtn pinkBtn" onClick={muteEvent}>Mute</button>
+             <button className="muteBtn pinkBtn" ref={muteRef} onClick={muteEvent}>Mute</button>
         </div>
         <p className="title">{title}</p>
     </div>

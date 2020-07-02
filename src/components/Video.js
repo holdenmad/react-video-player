@@ -13,16 +13,16 @@ const Video = ({src, title}) => {
         const volumeRef = useRef();
 
         // timer ref
+        const timeRef = useRef();
 
    //FUNCTIONS
-        //playpause - do we need to set a state? 
+        //function to play/pause
         const playPauseToggle = () => {
             if(videoRef.current.paused) {
                 videoRef.current.play();
-                
             } else{
                 videoRef.current.pause();
-                console.log(videoRef.current.readyState);
+                console.log(videoRef.currentTime);
             }
         }
 
@@ -35,26 +35,55 @@ const Video = ({src, title}) => {
         // const pauseEvent = () => {
         //     videoRef.current.pause();
         // };
-        //function to change volume
 
-        const volumeHandler = () => {
+        //function to change volume
+        const volumeHandler = (e) => {
             videoRef.current.volume = volumeRef.current.value;
+            console.log(volumeRef.current.value);
         };
+
+        //function to mute
+        const muteEvent = () => {
+            if(videoRef.current.muted === true) {
+                videoRef.current.muted = false;
+            } else{
+                videoRef.current.muted = true;
+            }
+        }
+
         //function to change time in video
+        const handleTimeUpdate =() => {
+            const timeValue = videoRef.current.currentTime / videoRef.current.duration;
+            timeRef.current.value = timeValue;
+        }
+
+        const handleTimeScrobble = (e) => {
+            videoRef.current.currentTime = e.currentTarget.value * videoRef.current.duration;
+            console.log(e.currentTarget.value);
+        }
 
 return (
     <div className="c-video">
     {/*Make simple HTML video with source*/}
-        <video ref={videoRef} className="videoPlayer" src={src} title={title} autoPlay={false} loop={true}></video>
-        <p>{title}</p>
+        <video ref={videoRef} className="videoPlayer" onTimeUpdate={handleTimeUpdate} src={src} title={title} autoPlay={false} loop={true}></video>
       <div className="controls">
-            <button className="playPause" onClick={playPauseToggle} data-icon="P" >Pl/Pa</button>
-            {/* <button className="stop" onClick={pauseEvent} data-icon="S" >Stop</button> */}
-             <div className="timer"><div></div><span aria-label="timer">00:00</span></div>
-             <input onChange={volumeHandler} type="range" ref={volumeRef}></input>
+            {/*Play/Pause Button*/}
+            <button className="pinkBtn" onClick={playPauseToggle} data-icon="P">Pl/Pa</button>
+            {/*Timer Slider - to change time? display time? onTimeUpdate?*/}
+             <input className="timer" onClick={handleTimeScrobble} defaultValue="0" min="0" max="1" step=".01" ref={timeRef} type="range" label="timer"/>
+            {/*Volume Slider*/}
+             <input className="volume" onChange={volumeHandler} defaultValue=".5" min="0.0" max="1.0" step=".01" type="range" ref={volumeRef}/>
+            {/**/}
+             <button className="pinkBtn" onClick={muteEvent}>Mute</button>
         </div>
+        <p className="title">{title}</p>
     </div>
 )
 }
 
 export default Video;
+
+/* Questions 
+- Which aspects of the volumeHandler are required? Why doesn't the input work without the min/max, step, type, defaultvalue?
+- 
+*/

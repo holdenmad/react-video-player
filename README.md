@@ -1,6 +1,6 @@
 # React Video Player - WBS Project 
 
-![Wurthering Heights by Kate Bush playing in React Video Player](https://i.ibb.co/drwZwx5/Screenshot-2020-07-03-at-10-03-04.png)
+
 
 ## Authors
 

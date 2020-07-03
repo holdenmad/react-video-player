@@ -1,6 +1,6 @@
 # React Video Player - WBS Project 
 
-
+![Image of Video Player with Wuthering Heights by Kate Bush as video](https://i.ibb.co/HTYtcHB/Screenshot-2020-07-03-at-16-18-35.png)
 
 ## Authors
 

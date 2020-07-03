@@ -25,12 +25,6 @@
 - Timestamp
 - Trashy vaporwave  a e s t h e t i c s
 
-## Challenges
-
-
-
-## Things Learned
-
 ## Available Scripts
 In the project directory, you can run:
 

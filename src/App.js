@@ -7,8 +7,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-     <Video src="./wu
-     theringheights.mp4" title="Wuthering Heights by Kate Bush"/>
+     <Video src="./wutheringheights.mp4" title="Wuthering Heights by Kate Bush"/>
     </div>
   );
 }

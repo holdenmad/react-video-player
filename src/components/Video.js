@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 // import Controls from './Controls';
 import '../Video.css';
 
-//Fuction for calculating correct time display
+//Function for calculating correct time display
 function sec2time(timeInSeconds) {
     var pad = function(num, size) { return ('000' + num).slice(size * -1); };
     const time = parseFloat(timeInSeconds).toFixed(3);

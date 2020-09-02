@@ -1,4 +1,4 @@
-# React Video Player - WBS Project 
+# React Video Player
 
 ![Image of Video Player with Wuthering Heights by Kate Bush as video](https://i.ibb.co/HTYtcHB/Screenshot-2020-07-03-at-16-18-35.png)
 
@@ -23,7 +23,7 @@
 - Volume slider
 - Time slider
 - Timestamp
-- Trashy vaporwave  a e s t h e t i c s
+- Trashy vaporwave a e s t h e t i c s
 
 ## Available Scripts
 In the project directory, you can run:
